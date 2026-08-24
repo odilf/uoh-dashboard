@@ -16,15 +16,25 @@ mod weather;
 
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;
-    tracing_subscriber::fmt()
+
+    let subscriber = tracing_subscriber::fmt();
+
+    #[cfg(debug_assertions)]
+    let subscriber = subscriber
         .with_writer(
             fs::OpenOptions::new()
                 .create(true)
                 .append(true)
                 .open("./uoh-dashboard.log")?,
         )
-        .with_max_level(Level::DEBUG)
-        .init();
+        .with_max_level(Level::DEBUG);
+
+    #[cfg(not(debug_assertions))]
+    let subscriber = subscriber
+        .with_writer(std::io::stderr)
+        .with_max_level(Level::INFO);
+
+    subscriber.init();
 
     ratatui::run(app)?;
     Ok(())
