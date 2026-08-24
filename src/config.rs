@@ -23,7 +23,7 @@ impl Config {
         let settings = config::Config::builder()
             .set_default("title_refresh_period", 5000)
             .unwrap()
-            .set_default("base_refresh_period", 1000)
+            .set_default("base_refresh_period", 100)
             .unwrap()
             .add_source(config::Environment::with_prefix("UOH_DASHBOARD"))
             .build()

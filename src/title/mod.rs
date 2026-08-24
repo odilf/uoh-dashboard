@@ -2,11 +2,14 @@ use rand::seq::IndexedRandom as _;
 use ratatui::{
     buffer::Buffer,
     layout::{Constraint, Rect},
-    text::{Line, Span, Text},
+    style::{Color, Style},
+    text::Text,
     widgets::Widget,
 };
 
-pub const TEXTS: &[&'static str] = &[
+const TEXTS: &[&'static str] = &[
+    include_str!("./text/rebel.txt"),
+    // Other
     include_str!("./text/big-money.txt"),
     include_str!("./text/big-mono-12.txt"),
     include_str!("./text/big.txt"),
@@ -18,15 +21,14 @@ pub const TEXTS: &[&'static str] = &[
     include_str!("./text/doh.txt"),
     include_str!("./text/impossible.txt"),
     include_str!("./text/isometric.txt"),
-    include_str!("./text/rebel.txt"),
     include_str!("./text/terrace.txt"),
 ];
 
 #[derive(Debug, Clone)]
-struct Title {
+pub struct Title {
     content: Text<'static>,
-    width: u8,
-    height: u8,
+    pub width: u8,
+    pub height: u8,
 }
 
 impl Title {
@@ -43,6 +45,16 @@ impl Title {
             width,
             height,
         }
+    }
+
+    pub(crate) fn set_color(&mut self, color: Color) {
+        self.content.style = Style::default().fg(color);
+    }
+}
+
+impl Default for Title {
+    fn default() -> Self {
+        Self::new(TEXTS[0])
     }
 }
 
