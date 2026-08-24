@@ -61,6 +61,7 @@ impl Default for Title {
 #[derive(Debug, Clone)]
 pub struct Titles {
     titles: Vec<Title>,
+    current: u8,
     pub width: u8,
     pub height: u8,
 }
@@ -79,6 +80,7 @@ impl Titles {
 
         Self {
             titles,
+            current: 0,
             width,
             height,
         }
@@ -91,13 +93,24 @@ impl Default for Titles {
     }
 }
 
+impl Titles {
+    pub fn select_random(&mut self) {
+        // TODO: Keep track of shown titles to have a more uniform distribution
+        self.current = rand::random_range(0..self.titles.len()) as u8;
+    }
+
+    pub fn active(&self) -> &Title {
+        &self.titles[self.current as usize]
+    }
+    pub fn active_mut(&mut self) -> &mut Title {
+        &mut self.titles[self.current as usize]
+    }
+}
+
 impl Widget for &mut Titles {
     fn render(self, area: Rect, buf: &mut Buffer) {
-        self.titles
-            // TODO: Keep track of shown titles to have a more uniform distribution
-            .choose(&mut rand::rng())
-            .unwrap()
-            .render(area, buf)
+        self.select_random();
+        self.active().render(area, buf)
     }
 }
 
