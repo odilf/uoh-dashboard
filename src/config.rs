@@ -5,7 +5,6 @@ use serde::Deserialize;
 #[non_exhaustive]
 #[derive(Debug, Clone, Copy, Deserialize)]
 pub struct Config {
-    pub title_refresh_period: Miliseconds,
     pub base_refresh_period: Miliseconds,
 }
 

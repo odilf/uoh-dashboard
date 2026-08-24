@@ -78,13 +78,13 @@ impl State {
         match self.mode {
             Mode::Dvd => frame.render_widget(&mut self.dvd, frame.area()),
             Mode::Stats => {
-                let [top, middle, bottom] = frame.area().layout(&Layout::vertical([
+                let [_top, middle, _bottom] = frame.area().layout(&Layout::vertical([
                     Constraint::Fill(1),
                     Constraint::Length(self.titles.height as u16),
                     Constraint::Fill(1),
                 ]));
 
-                let [left, middle, right] = middle.layout(&Layout::horizontal([
+                let [_left, middle, _right] = middle.layout(&Layout::horizontal([
                     Constraint::Fill(1),
                     Constraint::Length(self.titles.width as u16),
                     Constraint::Fill(1),

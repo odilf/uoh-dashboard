@@ -1,4 +1,3 @@
-use rand::seq::IndexedRandom as _;
 use ratatui::{
     buffer::Buffer,
     layout::{Constraint, Rect},
@@ -7,7 +6,7 @@ use ratatui::{
     widgets::Widget,
 };
 
-const TEXTS: &[&'static str] = &[
+const TEXTS: &[&str] = &[
     include_str!("./text/rebel.txt"),
     // Other
     include_str!("./text/big-money.txt"),

@@ -11,7 +11,7 @@ use ratatui::{
     widgets::Widget,
 };
 
-use crate::title::{Title, Titles};
+use crate::title::Titles;
 
 #[derive(Debug, Clone)]
 pub struct Dvd {
