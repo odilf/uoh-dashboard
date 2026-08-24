@@ -8,8 +8,9 @@ use ratatui::{
     widgets::Block,
 };
 
-use crate::title::Titles;
+use crate::{config::Config, title::Titles};
 
+mod config;
 mod title;
 mod weather;
 
@@ -23,7 +24,7 @@ fn app(terminal: &mut DefaultTerminal) -> std::io::Result<()> {
     let mut state = State::default();
     loop {
         terminal.draw(|frame| state.render(frame))?;
-        if !event::poll(Duration::from_secs(1))? {
+        if !event::poll(state.config.base_refresh_period.into())? {
             continue;
         }
 
@@ -39,6 +40,7 @@ fn app(terminal: &mut DefaultTerminal) -> std::io::Result<()> {
 
 #[derive(Debug, Clone, Default)]
 pub struct State {
+    config: Config,
     titles: Titles,
 }
 

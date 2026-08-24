@@ -5,10 +5,12 @@ edition = "2024"
 
 [dependencies]
 color-eyre = "0.6.5"
+config = "0.15.25"
 crossterm = "0.29.0"
 jiff = "0.2.35"
 rand = "0.10.2"
 ratatui = "0.30.2"
+serde = { version = "1.0.229", features = ["derive"] }
 
 # Read the optimization guideline for more details: https://ratatui.rs/recipes/apps/release-your-app/#optimizations
 [profile.release]
