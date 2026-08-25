@@ -68,7 +68,8 @@ impl Dvd {
             self.titles
                 .active_mut()
                 .set_color(Color::Indexed(rand::random()));
-            self.velocity += Vec2::from_angle(rand::random_range(0.0..TAU)) * 0.1;
+
+            self.velocity = self.velocity.rotate_angle(rand::random_range(-0.1..=0.1));
         }
     }
 }
